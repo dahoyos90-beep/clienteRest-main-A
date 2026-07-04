@@ -55,6 +55,77 @@ export class PostService {
   // ===========================
   getAll(): void {
     this.setLoading(true);
+
+    // 📌 DATOS DE PRUEBA EN ESPAÑOL
+    const mockPosts: Post[] = [
+      {
+        id: 1,
+        userId: 1,
+        title: 'Bienvenido al Panel Editorial',
+        body: 'Esta es una publicación de ejemplo en español. Puedes editar el contenido desde el servicio para personalizarlo.'
+      },
+      {
+        id: 2,
+        userId: 1,
+        title: 'Consejos para una buena redacción',
+        body: 'Asegúrate de que tus publicaciones sean claras y concisas. Usa párrafos cortos y lenguaje sencillo para conectar con tu audiencia.'
+      },
+      {
+        id: 3,
+        userId: 2,
+        title: 'Cómo organizar tu biblioteca de contenido',
+        body: 'Mantén un flujo editorial ordenado. Clasifica tus publicaciones por temas, fechas y responsables para facilitar la gestión.'
+      },
+      {
+        id: 4,
+        userId: 2,
+        title: 'La importancia de los comentarios',
+        body: 'Los comentarios enriquecen tus publicaciones. Fomenta la participación de los usuarios y responde a sus dudas.'
+      },
+      {
+        id: 5,
+        userId: 3,
+        title: 'Diseño de interfaz para gestores de contenido',
+        body: 'Una interfaz clara y atractiva mejora la experiencia de los editores. Usa colores que transmitan profesionalismo y confianza.'
+      },
+      {
+        id: 6,
+        userId: 3,
+        title: 'Estrategias para aumentar la visibilidad',
+        body: 'Comparte tus publicaciones en redes sociales y utiliza palabras clave relevantes para mejorar el posicionamiento.'
+      },
+      {
+        id: 7,
+        userId: 4,
+        title: 'Cómo medir el impacto de tu contenido',
+        body: 'Utiliza métricas como visitas, tiempo de lectura y comentarios para evaluar el rendimiento de tus publicaciones.'
+      },
+      {
+        id: 8,
+        userId: 4,
+        title: 'Guía para crear títulos atractivos',
+        body: 'Un buen título capta la atención. Usa preguntas, números y promesas para generar interés en tus lectores.'
+      },
+      {
+        id: 9,
+        userId: 5,
+        title: 'La importancia de la edición y corrección',
+        body: 'Revisa siempre tus textos antes de publicar. Una buena edición mejora la credibilidad y la calidad del contenido.'
+      },
+      {
+        id: 10,
+        userId: 5,
+        title: 'Tendencias en gestión de contenido para 2024',
+        body: 'La automatización, la inteligencia artificial y el contenido interactivo marcarán la pauta en la gestión de contenidos.'
+      }
+    ];
+
+    // Simular una llamada asíncrona
+    setTimeout(() => {
+      this._state.set({ data: mockPosts, loading: false, error: null });
+    }, 500);
+
+    /* 🔄 CÓDIGO ORIGINAL (API) - Comentado
     this.http.get<Post[]>(this.apiUrl)
       .pipe(
         map(posts => posts.map(p => this.formatPost(p))),
@@ -63,6 +134,7 @@ export class PostService {
           error: err => this.handleError('No fue posible cargar los posts.', err)
         })
       ).subscribe();
+    */
   }
 
   getPost(id: number): void {

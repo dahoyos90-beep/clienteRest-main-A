@@ -1,33 +1,55 @@
 /* ========================================
-   APP - ESTILOS ELEGANTES
+   APP - GLASS OSCURO CON MORADO/FUCSIA
    ======================================== */
 
 :host {
   display: block;
-  --brand: #db2777;
-  --brand-deep: #7c3aed;
-  --brand-gradient: linear-gradient(135deg, #db2777, #7c3aed);
-  --ink-strong: #1e293b;
-  --ink-muted: #475569;
-  --ink-subtle: #94a3b8;
+  --brand-gradient: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+  --brand-pink: #dd2a7b;
+  --brand-purple: #8134af;
+  --brand-orange: #f58529;
+  --ink-strong: #1a0b2e;
+  --ink-muted: #4a2b6b;
+  --ink-subtle: #7a5a9e;
   --ink-white: #ffffff;
-  --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 8px 24px rgba(124, 58, 237, 0.15);
-  --shadow-lg: 0 12px 40px rgba(124, 58, 237, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 12px 48px rgba(0, 0, 0, 0.3);
   --radius-full: 9999px;
   --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========================================
-   APP SHELL
+   APP SHELL - FONDO OSCURO CON GRADIENTES
    ======================================== */
 .app-shell {
   min-height: 100dvh;
-  background: linear-gradient(180deg, #faf5ff 0%, #fdf2f8 100%);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, #0f0a1a 0%, #1a0b2e 50%, #0f0a1a 100%);
+  position: relative;
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* ========================================
-   TOPBAR
+   TOPBAR - GLASS
    ======================================== */
 .topbar {
   position: sticky;
@@ -40,12 +62,16 @@
   margin: 0 auto;
   padding: 0.8rem 2rem;
   max-width: min(1200px, calc(100vw - 2rem));
+  background: var(--glass-bg);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--glass-border);
   border-radius: 0 0 1.5rem 1.5rem;
   box-shadow: var(--shadow-soft);
-  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+}
+
+.topbar:hover {
+  background: var(--glass-hover);
 }
 
 /* ========================================
@@ -55,7 +81,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
-  color: var(--ink-strong);
+  color: var(--ink-white);
   text-decoration: none;
   transition: transform var(--transition-base);
 }
@@ -74,12 +100,12 @@
   color: white;
   font-size: 1.4rem;
   font-weight: 800;
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 32px rgba(221, 42, 123, 0.3);
   transition: box-shadow var(--transition-base);
 }
 
 .brand-mark:hover {
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 12px 48px rgba(221, 42, 123, 0.4);
 }
 
 .brand strong {
@@ -92,16 +118,17 @@
 }
 
 /* ========================================
-   NAV LINKS
+   NAV LINKS - GLASS
    ======================================== */
 .nav-links {
   display: flex;
   gap: 0.3rem;
   padding: 0.4rem;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(124, 58, 237, 0.08);
-  box-shadow: var(--shadow-soft);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .nav-links a {
@@ -110,32 +137,40 @@
   gap: 0.4rem;
   padding: 0.6rem 1.2rem;
   border-radius: var(--radius-full);
-  color: var(--ink-muted);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
   transition: all var(--transition-base);
-  position: relative;
 }
 
 .nav-links a .icon {
   font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .nav-links a:hover {
-  background: rgba(124, 58, 237, 0.08);
-  color: var(--brand-deep);
+  background: var(--glass-hover);
+  color: rgba(255, 255, 255, 0.9);
   transform: translateY(-1px);
+}
+
+.nav-links a:hover .icon {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .nav-links a.is-active {
   background: var(--brand-gradient);
   color: white;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 4px 24px rgba(221, 42, 123, 0.3);
+}
+
+.nav-links a.is-active .icon {
+  color: white;
 }
 
 .nav-links a.is-active:hover {
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 8px 32px rgba(221, 42, 123, 0.4);
   transform: translateY(-2px);
 }
 
@@ -150,16 +185,16 @@
 }
 
 /* ========================================
-   FOOTER
+   FOOTER - GLASS
    ======================================== */
 .footer {
   width: min(1200px, calc(100vw - 2rem));
   margin: 0 auto;
   padding: 1.5rem 0 2rem;
-  color: var(--ink-subtle);
+  color: rgba(255, 255, 255, 0.3);
   text-align: center;
   font-size: 0.85rem;
-  border-top: 1px solid rgba(124, 58, 237, 0.06);
+  border-top: 1px solid var(--glass-border);
 }
 
 .footer p {
@@ -173,6 +208,14 @@
   font-family: 'Material Symbols Outlined';
   font-size: 1.2rem;
   line-height: 1;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ========================================

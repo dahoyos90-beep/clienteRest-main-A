@@ -7,12 +7,8 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(
-      routes, 
-      withComponentInputBinding(), // Permite usar @Input() para params de ruta
-      withViewTransitions()         // Habilita transiciones visuales nativas
-    ),
-    provideHttpClient(withFetch()), // Rendimiento optimizado con Fetch API
+    provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync()
   ]
 };
