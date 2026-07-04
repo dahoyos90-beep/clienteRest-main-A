@@ -1,0 +1,46 @@
+<article class="post-card">
+  <header class="card-header">
+    <div>
+      <p class="eyebrow">Publicación</p>
+      <h3>
+        <a [routerLink]="['/posts', post().id]">{{ post().title }}</a>
+      </h3>
+    </div>
+    <span class="post-id">#{{ post().id }}</span>
+  </header>
+
+  <div class="meta-row">
+    <span class="meta-chip">
+      <span class="icon" aria-hidden="true">person</span>
+      Responsable {{ post().userId }}
+    </span>
+    <span class="meta-chip">
+      <span class="icon" aria-hidden="true">article</span>
+      Listo para revisión
+    </span>
+  </div>
+
+  <p class="body-copy">
+    {{ post().body | slice: 0 : excerptLimit }}{{ isTruncated() ? '…' : '' }}
+  </p>
+
+  <footer class="card-actions">
+    <a class="btn btn-secondary" [routerLink]="['/posts', post().id]">
+      <span class="icon" aria-hidden="true">visibility</span>
+      Ver detalle
+    </a>
+    <a class="btn btn-tertiary" [routerLink]="['/posts', post().id, 'edit']">
+      <span class="icon" aria-hidden="true">edit</span>
+      Editar
+    </a>
+    <button
+      class="btn btn-danger"
+      type="button"
+      (click)="handleDelete($event)"
+      [attr.aria-label]="'Eliminar publicación número ' + post().id"
+    >
+      <span class="icon" aria-hidden="true">delete</span>
+      Eliminar
+    </button>
+  </footer>
+</article>

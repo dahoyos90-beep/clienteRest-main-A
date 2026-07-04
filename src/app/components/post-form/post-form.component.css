@@ -1,0 +1,103 @@
+.editor-form {
+  display: grid;
+  gap: 1rem;
+}
+.form-shell {
+  padding: clamp(1.35rem, 2vw, 2rem);
+  border: 1px solid rgb(192 132 252 / 0.35);
+  border-radius: 1.75rem;
+  background: linear-gradient(180deg, rgb(253 244 255 / 0.98), rgb(245 233 255 / 0.96));
+  box-shadow: var(--shadow-soft);
+}
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.form-header h2 {
+  margin: 0.3rem 0 0;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: 1.2;
+  color: rgb(88 28 135);
+}
+.quality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  align-self: flex-start;
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  background: rgb(192 38 211 / 0.12);
+  color: rgb(162 28 175);
+  font-weight: 700;
+}
+.eyebrow {
+  margin: 0;
+  color: rgb(162 28 175);
+  font-size: 0.77rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.field {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+.field label {
+  color: rgb(88 28 135);
+  font-weight: 700;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgb(192 132 252 / 0.4);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.92);
+  color: rgb(59 7 100);
+  font: inherit;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: rgb(192 38 211 / 0.55);
+  box-shadow: 0 0 0 4px rgb(217 70 239 / 0.18);
+  transform: translateY(-1px);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 11rem;
+}
+.helper-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgb(126 34 206 / 0.75);
+  font-size: 0.83rem;
+}
+.error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 1.15rem;
+  line-height: 1;
+}
+@media (max-width: 720px) {
+  .form-header,
+  .helper-row {
+    flex-direction: column;
+  }
+}

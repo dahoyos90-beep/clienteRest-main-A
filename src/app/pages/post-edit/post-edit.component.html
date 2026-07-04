@@ -1,0 +1,26 @@
+<section class="editor-shell">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Edicion</p>
+      <h1>Actualizar publicacion #{{ id() }}</h1>
+      <p>Ajusta el contenido, mejora la redaccion y guarda una version mas clara de la entrada.</p>
+    </div>
+    <a class="btn btn-ghost" [routerLink]="['/posts', id()]">
+      <span class="icon">visibility</span>
+      Ver detalle
+    </a>
+  </header>
+
+  @if (service.loading()) {
+    <div class="loading-box">
+      <span class="icon spin">progress_activity</span>
+      Cargando informacion...
+    </div>
+  } @else if (service.selected(); as post) {
+    <app-post-form
+      [initialData]="post"
+      (formSubmit)="onUpdate($event)"
+      (onCancel)="router.navigate(['/posts', id()])"
+    />
+  }
+</section>

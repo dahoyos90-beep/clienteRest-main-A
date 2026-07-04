@@ -1,0 +1,69 @@
+:root {
+  /* He añadido esta variable para tu color fucsia */
+  --accent-strong: #ff007f; 
+  --ink-soft: #666;
+}
+
+.editor-shell {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+}
+
+.page-head h1 {
+  margin: 0;
+  line-height: 1.08;
+}
+
+.page-head p:last-child {
+  max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+.loading-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 8rem;
+  padding: 1rem 1.2rem;
+  border-radius: 1.5rem;
+  background: rgb(255 240 245 / 0.9); /* Ajustado para armonizar con fucsia */
+  color: var(--accent-strong);
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .page-head {
+    flex-direction: column;
+    align-items: start;
+  }
+}

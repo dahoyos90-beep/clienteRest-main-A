@@ -1,0 +1,120 @@
+:host {
+  display: block;
+  /* Definición de variables de color integradas */
+  --brand: #db2777;        /* Fucsia */
+  --brand-deep: #7c3aed;    /* Morado */
+  --ink-strong: #1e293b;
+  --ink-muted: #475569;
+  --ink-subtle: #94a3b8;
+  --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.app-shell {
+  min-height: 100dvh;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 1rem 0;
+  max-width: min(1180px, calc(100vw - 2rem));
+  backdrop-filter: blur(18px);
+  background: rgb(255 255 255 / 0.8); /* Ajustado para transparencia */
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--ink-strong);
+  text-decoration: none;
+}
+
+.brand strong {
+  font-size: 1.1rem;
+  /* Degradado aplicado al texto de la marca */
+  background: linear-gradient(to right, var(--brand), var(--brand-deep));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+  color: white;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  /* Sombra ajustada al tono morado */
+  box-shadow: 0 10px 20px rgb(124 58 237 / 0.3);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.4rem;
+  border: 1px solid rgb(255 255 255 / 0.8);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-links a {
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  color: var(--ink-muted);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 250ms ease;
+}
+
+/* Hover y estado activo usando la paleta morada */
+.nav-links a:hover,
+.nav-links a.is-active {
+  background: var(--brand-deep);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgb(124 58 237 / 0.4);
+}
+
+.app-content {
+  width: min(1180px, calc(100vw - 2rem));
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+  animation: fade-up 420ms ease;
+}
+
+.footer {
+  width: min(1180px, calc(100vw - 2rem));
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  color: var(--ink-subtle);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    flex-direction: column;
+    padding: 1.5rem 0;
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+}

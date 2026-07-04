@@ -1,0 +1,82 @@
+@if (service.loading()) {
+  <section class="detail-shell state-shell">
+    <span class="icon spin">progress_activity</span>
+    <p>Cargando detalle y comentarios...</p>
+  </section>
+}
+
+@if (service.error(); as error) {
+  <section class="detail-shell state-shell error-state">
+    <span class="icon">error</span>
+    <p>No se pudo cargar la publicación. {{ error }}</p>
+  </section>
+}
+
+@if (service.selected(); as post) {
+  <article class="detail-shell">
+    <header class="detail-header">
+      <a class="text-link" routerLink="/posts">
+        <span class="icon">arrow_back</span>
+        Volver al inicio
+      </a>
+      <a class="btn btn-secondary" [routerLink]="['/posts', post.id, 'edit']">
+        <span class="icon">edit</span>
+        Editar entrada
+      </a>
+    </header>
+    <section class="detail-hero">
+      <div>
+        <p class="eyebrow">Detalle de contenido</p>
+        <h1>{{ post.title }}</h1>
+        <p class="meta-copy">
+          Codigo #{{ post.id }} · Responsable {{ post.userId }} · Contenido activo
+        </p>
+      </div>
+      <div class="summary-tile">
+        <span class="icon">forum</span>
+        <strong>{{ comments().length }}</strong>
+        <small>comentarios registrados</small>
+      </div>
+    </section>
+    <section class="content-card">
+      <h2>Contenido</h2>
+      <p>{{ post.body }}</p>
+    </section>
+    <section class="comments-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Seguimiento</p>
+          <h2>Comentarios</h2>
+        </div>
+        <span class="count-pill">{{ comments().length }} registros</span>
+      </div>
+
+      @if (commentsError(); as commentsErrorMsg) {
+        <div class="state-shell error-state">
+          <span class="icon">error</span>
+          <p>{{ commentsErrorMsg }}</p>
+        </div>
+      } @else {
+        <div class="comment-list">
+          @for (comment of comments(); track comment.id) {
+            <article class="comment-item">
+              <div class="comment-top">
+                <div>
+                  <strong>{{ comment.name }}</strong>
+                  <small>{{ comment.email }}</small>
+                </div>
+                <span class="comment-id">#{{ comment.id }}</span>
+              </div>
+              <p>{{ comment.body }}</p>
+            </article>
+          } @empty {
+            <div class="state-shell">
+              <span class="icon">chat</span>
+              <p>No hay comentarios disponibles por el momento.</p>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  </article>
+}

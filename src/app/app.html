@@ -1,0 +1,15 @@
+<div class="app-shell">
+  <header class="topbar" style="padding: 20px; background: #f4f4f4; border-bottom: 1px solid #ccc;">
+    <a routerLink="/posts" style="text-decoration: none; color: black;">
+      <strong>Panel Editorial</strong>
+    </a>
+    <nav style="margin-top: 10px;">
+      <a routerLink="/posts" style="margin-right: 15px;">Inicio</a>
+      <a routerLink="/posts/new">Nueva publicación</a>
+    </nav>
+  </header>
+
+  <main class="app-content" style="padding: 20px;">
+    <router-outlet></router-outlet>
+  </main>
+</div>

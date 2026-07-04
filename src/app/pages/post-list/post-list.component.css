@@ -1,0 +1,334 @@
+:root {
+  /* Asegurando la consistencia del color fucsia en toda la interfaz */
+  --accent-strong: #ff007f; 
+}
+
+.dashboard-shell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.page-head,
+.workspace-panel,
+.priority-card,
+.status-panel,
+.metric-card {
+  border: 1px solid var(--border-soft);
+  border-radius: 1.75rem;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  padding: clamp(1.35rem, 3vw, 2.2rem);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.95), rgb(247 250 252 / 0.94)), var(--surface);
+}
+
+.page-title h1,
+.priority-card h2,
+.toolbar-copy h2 {
+  margin: 0;
+  color: var(--ink-strong);
+  line-height: 1.06;
+}
+
+.page-title h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.page-summary {
+  max-width: 58ch;
+  margin: 0.7rem 0 0;
+  color: var(--ink-soft);
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.9fr);
+  gap: 1.5rem;
+}
+
+.priority-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(14rem, 0.7fr);
+  gap: 1.25rem;
+  overflow: hidden;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  background: radial-gradient(circle at top right, rgba(255, 0, 127, 0.1), transparent 30%), linear-gradient(145deg, rgb(255 255 255 / 0.98), rgb(241 245 249 / 0.95));
+}
+
+.priority-copy p:last-child {
+  margin-bottom: 0;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+
+.priority-meta {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+}
+
+.meta-block {
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(148 163 184 / 0.16);
+}
+
+.meta-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--ink-subtle);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.meta-block strong {
+  font-size: 1.35rem;
+  color: var(--ink-strong);
+}
+
+.status-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgb(15 23 42 / 0.96), rgb(30 41 59 / 0.96));
+  border-color: rgb(15 23 42 / 0.15);
+}
+
+.metric-card {
+  padding: 1.15rem 1.2rem;
+  border-color: rgb(255 255 255 / 0.08);
+  background: rgb(255 255 255 / 0.04);
+  color: white;
+  box-shadow: none;
+}
+
+.metric-label,
+.metric-card small {
+  display: block;
+}
+
+.metric-label {
+  color: rgb(226 232 240 / 0.82);
+  font-size: 0.88rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 0.45rem 0;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+}
+
+.workspace-panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.toolbar-copy h2 {
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.toolbar-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(15rem, 0.8fr);
+  gap: 1rem;
+}
+
+.search-field,
+.filter-field {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.9);
+}
+
+.search-field input,
+.filter-field select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--ink-strong);
+  font: inherit;
+  cursor: pointer;
+}
+
+.search-field input:focus,
+.filter-field select:focus {
+  outline: none;
+}
+
+.state-box,
+.empty-state {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.state-loading {
+  background: rgb(236 254 255 / 0.95);
+  color: var(--accent-strong);
+}
+
+.state-error {
+  justify-content: space-between;
+  background: rgb(254 242 242 / 0.96);
+  color: #991b1b;
+}
+
+.state-error p {
+  margin: 0.35rem 0 0;
+}
+
+.results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.2rem 0 1rem;
+}
+
+.result-count {
+  margin: 0;
+  color: var(--ink-subtle);
+  font-weight: 700;
+}
+
+.pagination-summary {
+  color: var(--ink-subtle);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.post-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.page-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.pagination-btn {
+  min-width: 8.75rem;
+}
+
+.page-pill {
+  min-width: 2.7rem;
+  height: 2.7rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.88);
+  color: var(--ink-muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page-pill.is-active {
+  border-color: transparent;
+  background: rgb(15 23 42 / 0.94);
+  color: white;
+  box-shadow: 0 10px 24px rgb(15 23 42 / 0.14);
+}
+
+.empty-state {
+  flex-direction: column;
+  justify-content: center;
+  min-height: 16rem;
+  border: 1px dashed var(--border-soft);
+  background: rgb(248 250 252 / 0.7);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 920px) {
+  .page-head,
+  .overview-grid,
+  .priority-card,
+  .toolbar,
+  .toolbar-controls,
+  .pagination-bar {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .page-head {
+    align-items: start;
+  }
+
+  .page-actions,
+  .results-head {
+    justify-content: start;
+  }
+
+  .results-head,
+  .pagination-bar {
+    align-items: stretch;
+  }
+
+  .pagination-btn {
+    width: 100%;
+  }
+}

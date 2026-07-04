@@ -1,0 +1,163 @@
+<section class="dashboard-shell">
+  <header class="page-head">
+    <div class="page-title">
+      <p class="eyebrow">Gestion de publicaciones</p>
+      <h1>Panel principal</h1>
+      <p class="page-summary">
+        Vista central para revisar contenido, localizar entradas y mantener el flujo editorial bajo control.
+      </p>
+    </div>
+
+    <div class="page-actions">
+      <button class="btn btn-ghost" type="button" (click)="service.getAll()">
+        <span class="icon">refresh</span>
+        Actualizar
+      </button>
+      <a class="btn btn-primary" routerLink="/posts/new">
+        <span class="icon">add_circle</span>
+        Nueva publicacion
+      </a>
+    </div>
+  </header>
+
+  <section class="overview-grid">
+    <article class="priority-card">
+      @if (service.featuredPost(); as featured) {
+        <div class="priority-copy">
+          <p class="eyebrow">Entrada prioritaria</p>
+          <h2>{{ featured.title }}</h2>
+          <p>{{ featured.body }}</p>
+        </div>
+
+        <div class="priority-meta">
+          <div class="meta-block">
+            <span class="meta-label">Codigo</span>
+            <strong>#{{ featured.id }}</strong>
+          </div>
+          <div class="meta-block">
+            <span class="meta-label">Responsable</span>
+            <strong>{{ featured.userId }}</strong>
+          </div>
+          <a class="btn btn-secondary" [routerLink]="['/posts', featured.id]">
+            <span class="icon">north_east</span>
+            Abrir entrada
+          </a>
+        </div>
+      }
+    </article>
+
+    <aside class="status-panel">
+      <article class="metric-card">
+        <span class="metric-label">Publicaciones</span>
+        <strong>{{ service.postCount() }}</strong>
+        <small>disponibles en la base de trabajo</small>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Resultados</span>
+        <strong>{{ service.filteredCount() }}</strong>
+        <small>coinciden con los filtros activos</small>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">Responsables</span>
+        <strong>{{ service.userCount() }}</strong>
+        <small>equipos o autores asociados</small>
+      </article>
+    </aside>
+  </section>
+
+  <section class="workspace-panel">
+    <div class="toolbar">
+      <div class="toolbar-copy">
+        <p class="eyebrow">Exploracion</p>
+        <h2>Biblioteca de contenido</h2>
+      </div>
+
+      <div class="toolbar-controls">
+        <label class="search-field">
+          <span class="icon">search</span>
+          <input [formControl]="searchCtrl" type="search" placeholder="Buscar por tema, contenido o codigo" />
+        </label>
+
+        <label class="filter-field">
+          <span class="icon">tune</span>
+          <select [formControl]="userFilterCtrl">
+            <option value="all">Todos los responsables</option>
+            @for (userId of service.userOptions(); track userId) {
+              <option [value]="userId">Responsable {{ userId }}</option>
+            }
+          </select>
+        </label>
+      </div>
+    </div>
+
+    @if (service.loading()) {
+      <div class="state-box state-loading">
+        <span class="icon spin">progress_activity</span>
+        Cargando publicaciones...
+      </div>
+    }
+
+    @if (service.error(); as error) {
+      <div class="state-box state-error">
+        <div>
+          <strong>No se pudo actualizar la vista</strong>
+          <p>{{ error }}</p>
+        </div>
+        <button class="btn btn-danger" type="button" (click)="service.getAll()">Intentar de nuevo</button>
+      </div>
+    }
+
+    <div class="results-head">
+      <p class="result-count">
+        Mostrando {{ visibleRange().start }}-{{ visibleRange().end }} de {{ service.filteredCount() }} publicaciones
+      </p>
+      <div class="pagination-summary">
+        <span>Pagina {{ currentPage() }} de {{ totalPages() }}</span>
+      </div>
+    </div>
+
+    <div class="post-grid">
+      @for (post of paginatedPosts(); track post.id) {
+        <app-post-card [post]="post" (onDelete)="deletePost($event)" />
+      } @empty {
+        <div class="empty-state">
+          <span class="icon">inventory_2</span>
+          <h3>No hay coincidencias</h3>
+          <p>Cambia los filtros o actualiza la vista para seguir trabajando.</p>
+        </div>
+      }
+    </div>
+
+    @if (service.filteredCount() > pageSize) {
+      <footer class="pagination-bar">
+        <button class="btn btn-ghost pagination-btn" type="button" (click)="previousPage()" [disabled]="currentPage() === 1">
+          <span class="icon">chevron_left</span>
+          Anterior
+        </button>
+
+        <div class="page-pills">
+          @for (page of pageNumbers(); track page) {
+            <button
+              class="page-pill"
+              type="button"
+              [class.is-active]="currentPage() === page"
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          }
+        </div>
+
+        <button
+          class="btn btn-ghost pagination-btn"
+          type="button"
+          (click)="nextPage()"
+          [disabled]="currentPage() === totalPages()"
+        >
+          Siguiente
+          <span class="icon">chevron_right</span>
+        </button>
+      </footer>
+    }
+  </section>
+</section>

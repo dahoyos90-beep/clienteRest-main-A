@@ -1,0 +1,65 @@
+<form class="editor-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <section class="form-shell">
+    <header class="form-header">
+      <div>
+        <p class="eyebrow">{{ initialData() ? 'Edicion' : 'Redaccion' }}</p>
+        <h2>{{ initialData() ? 'Refina el texto antes de publicarlo' : 'Escribe una publicacion clara y bien estructurada' }}</h2>
+      </div>
+      <div class="quality-badge">
+        <span class="icon">verified</span>
+        Revision en tiempo real
+      </div>
+    </header>
+
+    <div class="field">
+      <label for="title">Titulo</label>
+      <input id="title" type="text" formControlName="title" placeholder="Ej. Resumen semanal del equipo de contenidos" />
+      <div class="helper-row">
+        <span>Minimo 5 caracteres, maximo 90.</span>
+        <span>{{ form.controls.title.value.length }}/90</span>
+      </div>
+      @if (form.controls.title.touched && form.controls.title.invalid) {
+        <p class="error">Escribe un titulo mas claro y descriptivo.</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="body">Contenido</label>
+      <textarea
+        id="body"
+        rows="8"
+        formControlName="body"
+        placeholder="Resume el contexto, las decisiones clave y los siguientes pasos."
+      ></textarea>
+      <div class="helper-row">
+        <span>Procura una redaccion concreta, util y facil de revisar.</span>
+        <span>{{ form.controls.body.value.length }}/500</span>
+      </div>
+      @if (form.controls.body.touched && form.controls.body.invalid) {
+        <p class="error">Agrega mas contexto al contenido.</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="userId">Responsable</label>
+      <input id="userId" type="number" formControlName="userId" min="1" max="10" />
+      <div class="helper-row">
+        <span>Selecciona el responsable asociado a la publicacion.</span>
+      </div>
+      @if (form.controls.userId.touched && form.controls.userId.invalid) {
+        <p class="error">Selecciona un responsable valido entre 1 y 10.</p>
+      }
+    </div>
+  </section>
+
+  <footer class="form-actions">
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+      <span class="icon">{{ initialData() ? 'save' : 'add_circle' }}</span>
+      {{ initialData() ? 'Guardar cambios' : 'Crear publicacion' }}
+    </button>
+    <button class="btn btn-ghost" type="button" (click)="onCancel.emit()">
+      <span class="icon">arrow_back</span>
+      Cancelar
+    </button>
+  </footer>
+</form>
