@@ -1,11 +1,12 @@
-import { SlicePipe } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Post } from '../../models/post.model';
 
 @Component({
   selector: 'app-post-card',
-  imports: [RouterLink, SlicePipe],
+  standalone: true,
+  imports: [CommonModule, RouterLink, SlicePipe],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,7 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Post, CreatePost, UpdatePost, AsyncListState, ApiError } from '../models/post.model';
+import { Post, CreatePost, UpdatePost, AsyncListState, ApiError, Comment } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,12 @@ export class PostService {
     });
   });
 
+  // Opciones de usuarios para el filtro
+  readonly userOptions = computed(() => {
+    const users = new Set(this.posts().map(p => p.userId));
+    return Array.from(users).sort();
+  });
+
   // ===========================
   // CRUD
   // ===========================
@@ -57,6 +63,37 @@ export class PostService {
           error: err => this.handleError('No fue posible cargar los posts.', err)
         })
       ).subscribe();
+  }
+
+  getPost(id: number): void {
+    this.setLoading(true);
+    this.http.get<Post>(`${this.apiUrl}/${id}`)
+      .pipe(
+        map(p => this.formatPost(p)),
+        tap({
+          next: post => {
+            this._state.update(s => ({
+              ...s,
+              data: s.data?.map(p => p.id === id ? post : p) || [post],
+              loading: false,
+              error: null
+            }));
+          },
+          error: err => this.handleError(`No fue posible cargar el post ${id}.`, err)
+        })
+      ).subscribe();
+  }
+
+  getComments(postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${this.apiUrl}/${postId}/comments`).pipe(
+      catchError(err => {
+        const error: ApiError = { 
+          status: err.status || 500, 
+          message: 'No se pudieron cargar los comentarios.' 
+        };
+        return throwError(() => error);
+      })
+    );
   }
 
   create(data: CreatePost): Observable<Post> {

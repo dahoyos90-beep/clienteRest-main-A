@@ -1,7 +1,7 @@
 <section class="dashboard-shell">
   <header class="page-head">
     <div class="page-title">
-      <p class="eyebrow">Gestion de publicaciones</p>
+      <p class="eyebrow">Gestión de publicaciones</p>
       <h1>Panel principal</h1>
       <p class="page-summary">
         Vista central para revisar contenido, localizar entradas y mantener el flujo editorial bajo control.
@@ -15,51 +15,58 @@
       </button>
       <a class="btn btn-primary" routerLink="/posts/new">
         <span class="icon">add_circle</span>
-        Nueva publicacion
+        Nueva publicación
       </a>
     </div>
   </header>
 
   <section class="overview-grid">
     <article class="priority-card">
-      @if (service.featuredPost(); as featured) {
+      @if (service.posts().length > 0) {
+        @let featured = service.posts()[0];
         <div class="priority-copy">
-          <p class="eyebrow">Entrada prioritaria</p>
+          <p class="eyebrow">📌 Entrada prioritaria</p>
           <h2>{{ featured.title }}</h2>
-          <p>{{ featured.body }}</p>
+          <p>{{ featured.body | slice:0:200 }}{{ featured.body.length > 200 ? '...' : '' }}</p>
         </div>
 
         <div class="priority-meta">
           <div class="meta-block">
-            <span class="meta-label">Codigo</span>
+            <span class="meta-label">Código</span>
             <strong>#{{ featured.id }}</strong>
           </div>
           <div class="meta-block">
             <span class="meta-label">Responsable</span>
-            <strong>{{ featured.userId }}</strong>
+            <strong>Usuario {{ featured.userId }}</strong>
           </div>
           <a class="btn btn-secondary" [routerLink]="['/posts', featured.id]">
             <span class="icon">north_east</span>
             Abrir entrada
           </a>
         </div>
+      } @else {
+        <div class="priority-copy">
+          <p class="eyebrow">📌 Sin entradas</p>
+          <h2>No hay publicaciones disponibles</h2>
+          <p>Comienza creando tu primera publicación.</p>
+        </div>
       }
     </article>
 
     <aside class="status-panel">
       <article class="metric-card">
-        <span class="metric-label">Publicaciones</span>
-        <strong>{{ service.postCount() }}</strong>
+        <span class="metric-label">📚 Publicaciones</span>
+        <strong>{{ service.posts().length }}</strong>
         <small>disponibles en la base de trabajo</small>
       </article>
       <article class="metric-card">
-        <span class="metric-label">Resultados</span>
-        <strong>{{ service.filteredCount() }}</strong>
+        <span class="metric-label">🔍 Resultados</span>
+        <strong>{{ filteredList().length }}</strong>
         <small>coinciden con los filtros activos</small>
       </article>
       <article class="metric-card">
-        <span class="metric-label">Responsables</span>
-        <strong>{{ service.userCount() }}</strong>
+        <span class="metric-label">👥 Responsables</span>
+        <strong>{{ service.userOptions().length }}</strong>
         <small>equipos o autores asociados</small>
       </article>
     </aside>
@@ -68,14 +75,14 @@
   <section class="workspace-panel">
     <div class="toolbar">
       <div class="toolbar-copy">
-        <p class="eyebrow">Exploracion</p>
+        <p class="eyebrow">🔎 Exploración</p>
         <h2>Biblioteca de contenido</h2>
       </div>
 
       <div class="toolbar-controls">
         <label class="search-field">
           <span class="icon">search</span>
-          <input [formControl]="searchCtrl" type="search" placeholder="Buscar por tema, contenido o codigo" />
+          <input [formControl]="searchCtrl" type="search" placeholder="Buscar por tema, contenido o código" />
         </label>
 
         <label class="filter-field">
@@ -100,8 +107,8 @@
     @if (service.error(); as error) {
       <div class="state-box state-error">
         <div>
-          <strong>No se pudo actualizar la vista</strong>
-          <p>{{ error }}</p>
+          <strong>❌ No se pudo actualizar la vista</strong>
+          <p>{{ error.message }}</p>
         </div>
         <button class="btn btn-danger" type="button" (click)="service.getAll()">Intentar de nuevo</button>
       </div>
@@ -109,10 +116,10 @@
 
     <div class="results-head">
       <p class="result-count">
-        Mostrando {{ visibleRange().start }}-{{ visibleRange().end }} de {{ service.filteredCount() }} publicaciones
+        Mostrando {{ visibleRange().start }}-{{ visibleRange().end }} de {{ filteredList().length }} publicaciones
       </p>
       <div class="pagination-summary">
-        <span>Pagina {{ currentPage() }} de {{ totalPages() }}</span>
+        <span>Página {{ currentPage() }} de {{ totalPages() }}</span>
       </div>
     </div>
 
@@ -128,7 +135,7 @@
       }
     </div>
 
-    @if (service.filteredCount() > pageSize) {
+    @if (filteredList().length > pageSize) {
       <footer class="pagination-bar">
         <button class="btn btn-ghost pagination-btn" type="button" (click)="previousPage()" [disabled]="currentPage() === 1">
           <span class="icon">chevron_left</span>
@@ -137,14 +144,18 @@
 
         <div class="page-pills">
           @for (page of pageNumbers(); track page) {
-            <button
-              class="page-pill"
-              type="button"
-              [class.is-active]="currentPage() === page"
-              (click)="goToPage(page)"
-            >
-              {{ page }}
-            </button>
+            @if (page === -1) {
+              <span class="page-ellipsis">…</span>
+            } @else {
+              <button
+                class="page-pill"
+                type="button"
+                [class.is-active]="currentPage() === page"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            }
           }
         </div>
 

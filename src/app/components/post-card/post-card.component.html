@@ -1,7 +1,7 @@
 <article class="post-card">
   <header class="card-header">
     <div>
-      <p class="eyebrow">Publicación</p>
+      <p class="eyebrow">📄 Publicación</p>
       <h3>
         <a [routerLink]="['/posts', post().id]">{{ post().title }}</a>
       </h3>
@@ -21,7 +21,7 @@
   </div>
 
   <p class="body-copy">
-    {{ post().body | slice: 0 : excerptLimit }}{{ isTruncated() ? '…' : '' }}
+    {{ post().body | slice : 0 : excerptLimit }}{{ isTruncated() ? '…' : '' }}
   </p>
 
   <footer class="card-actions">

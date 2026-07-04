@@ -1,9 +1,9 @@
 <section class="editor-shell">
   <header class="page-head">
     <div>
-      <p class="eyebrow">Nueva entrada</p>
-      <h1>Redacta una publicacion</h1>
-      <p>Completa la informacion principal y deja el contenido listo para revisarlo o compartirlo.</p>
+      <p class="eyebrow">✨ Nueva entrada</p>
+      <h1>Redacta una publicación</h1>
+      <p>Completa la información principal y deja el contenido listo para revisarlo o compartirlo.</p>
     </div>
     <a class="btn btn-ghost" routerLink="/posts">
       <span class="icon">arrow_back</span>
@@ -12,7 +12,10 @@
   </header>
 
   @if (error()) {
-    <p class="form-error" role="alert">{{ error() }}</p>
+    <p class="form-error" role="alert">
+      <span class="icon">error</span>
+      {{ error() }}
+    </p>
   }
 
   <app-post-form

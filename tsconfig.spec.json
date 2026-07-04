@@ -4,6 +4,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "rootDir": "./src", // <-- Propiedad agregada que resuelve el error
     "types": [
       "vitest/globals"
     ]

@@ -1,10 +1,12 @@
 import { Component, OnInit, inject, input, output, effect } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreatePost, Post } from '../../models/post.model';
 
 @Component({
   selector: 'app-post-form',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './post-form.component.html',
   styleUrl: './post-form.component.css',
 })
@@ -18,7 +20,7 @@ export class PostFormComponent implements OnInit {
   readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(90)]],
     body: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-    userId: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+    userId: [1, [Validators.required, Validators.min(1)]],
   });
 
   constructor() {
@@ -40,6 +42,15 @@ export class PostFormComponent implements OnInit {
         userId: data.userId,
       });
     }
+  }
+
+  // Método seguro para obtener el contador de caracteres
+  getTitleLength(): number {
+    return this.form.controls.title.value?.length || 0;
+  }
+
+  getBodyLength(): number {
+    return this.form.controls.body.value?.length || 0;
   }
 
   onSubmit(): void {

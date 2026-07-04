@@ -1,44 +1,228 @@
+/* ========================================
+   POST-CREATE - ESTILOS ELEGANTES
+   ======================================== */
+
+:root {
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+  --purple-700: #7e22ce;
+  --pink-50: #fdf2f8;
+  --pink-100: #fce7f3;
+  --pink-200: #fbcfe8;
+  --pink-300: #f9a8d4;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --pink-600: #db2777;
+  --accent-strong: #ff007f;
+  --ink-soft: #7a5a9e;
+  --text-primary: #1a0b2e;
+  --text-secondary: #4a2b6b;
+  --text-soft: #7a5a9e;
+  --bg-card: #ffffff;
+  --border-soft: #e9d5ff;
+  --shadow-sm: 0 2px 12px rgba(147, 51, 234, 0.08);
+  --shadow-md: 0 4px 24px rgba(147, 51, 234, 0.14);
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gradient-card: linear-gradient(145deg, #ffffff, #faf5ff);
+}
+
+/* ========================================
+   EDITOR SHELL
+   ======================================== */
 .editor-shell {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  animation: fadeIn 0.4s ease-out;
 }
+
+/* ========================================
+   PAGE HEAD
+   ======================================== */
 .page-head {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  align-items: end;
+  align-items: center;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-xl);
+  background: var(--gradient-card);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
 }
+
+.page-head:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.page-head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.3rem;
+  color: var(--pink-500);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
 .page-head h1 {
   margin: 0;
-  line-height: 1.08;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
 }
+
+.page-head h1 span {
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .page-head p:last-child {
   max-width: 60ch;
   color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin: 0.3rem 0 0;
+  line-height: 1.7;
 }
-.eyebrow {
-  margin: 0 0 0.45rem;
-  color: var(--accent-strong);
-  font-size: 0.76rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+
+.page-head .btn-ghost {
+  flex-shrink: 0;
 }
+
+/* ========================================
+   BOTONES
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.8rem;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-soft);
+}
+
+.btn-ghost:hover {
+  background: var(--purple-50);
+  border-color: var(--purple-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #7e22ce, #db2777);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(147, 51, 234, 0.25);
+}
+
+/* ========================================
+   FORM ERROR
+   ======================================== */
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-lg);
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #fecaca;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.form-error .icon {
+  font-size: 1.3rem;
+  color: #dc2626;
+}
+
+/* ========================================
+   ICONOS
+   ======================================== */
 .icon {
   font-family: 'Material Symbols Outlined';
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   line-height: 1;
 }
-.form-error {
-  margin: 0;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  background: color-mix(in srgb, red 12%, transparent);
-  color: #b91c1c;
-  font-size: 0.9rem;
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-@media (max-width: 760px) {
+
+/* ========================================
+RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
   .page-head {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .page-head .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .editor-shell {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-head h1 {
+    font-size: 1.3rem;
+  }
+
+  .form-error {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
   }
 }

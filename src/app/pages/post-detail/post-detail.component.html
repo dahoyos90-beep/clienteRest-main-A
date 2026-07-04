@@ -8,11 +8,11 @@
 @if (service.error(); as error) {
   <section class="detail-shell state-shell error-state">
     <span class="icon">error</span>
-    <p>No se pudo cargar la publicación. {{ error }}</p>
+    <p>No se pudo cargar la publicación. {{ error.message }}</p>
   </section>
 }
 
-@if (service.selected(); as post) {
+@if (post(); as post) {
   <article class="detail-shell">
     <header class="detail-header">
       <a class="text-link" routerLink="/posts">
@@ -24,12 +24,13 @@
         Editar entrada
       </a>
     </header>
+
     <section class="detail-hero">
       <div>
-        <p class="eyebrow">Detalle de contenido</p>
+        <p class="eyebrow">📄 Detalle de contenido</p>
         <h1>{{ post.title }}</h1>
         <p class="meta-copy">
-          Codigo #{{ post.id }} · Responsable {{ post.userId }} · Contenido activo
+          Código #{{ post.id }} · Responsable {{ post.userId }} · Contenido activo
         </p>
       </div>
       <div class="summary-tile">
@@ -38,20 +39,27 @@
         <small>comentarios registrados</small>
       </div>
     </section>
+
     <section class="content-card">
-      <h2>Contenido</h2>
+      <h2>📝 Contenido</h2>
       <p>{{ post.body }}</p>
     </section>
+
     <section class="comments-card">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Seguimiento</p>
+          <p class="eyebrow">💬 Seguimiento</p>
           <h2>Comentarios</h2>
         </div>
         <span class="count-pill">{{ comments().length }} registros</span>
       </div>
 
-      @if (commentsError(); as commentsErrorMsg) {
+      @if (commentsLoading()) {
+        <div class="state-shell">
+          <span class="icon spin">progress_activity</span>
+          <p>Cargando comentarios...</p>
+        </div>
+      } @else if (commentsError(); as commentsErrorMsg) {
         <div class="state-shell error-state">
           <span class="icon">error</span>
           <p>{{ commentsErrorMsg }}</p>

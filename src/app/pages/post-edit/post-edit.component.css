@@ -1,58 +1,271 @@
+/* ========================================
+   POST-EDIT - ESTILOS ELEGANTES
+   ======================================== */
+
 :root {
-  /* He añadido esta variable para tu color fucsia */
-  --accent-strong: #ff007f; 
-  --ink-soft: #666;
+  /* Colores principales */
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+  --purple-700: #7e22ce;
+  --purple-800: #6b21a8;
+  --purple-900: #581c87;
+
+  --pink-50: #fdf2f8;
+  --pink-100: #fce7f3;
+  --pink-200: #fbcfe8;
+  --pink-300: #f9a8d4;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --pink-600: #db2777;
+  --pink-700: #be185d;
+  --pink-800: #9d174d;
+  --pink-900: #831843;
+
+  /* Acentos */
+  --accent-strong: #ff007f;
+  --accent-gradient: linear-gradient(135deg, #9333ea, #ec4899);
+  --accent-gradient-hover: linear-gradient(135deg, #7e22ce, #db2777);
+  
+  /* Texto */
+  --text-primary: #1a0b2e;
+  --text-secondary: #4a2b6b;
+  --text-soft: #7a5a9e;
+  --text-light: #a88bc8;
+  --ink-soft: #7a5a9e;
+  
+  /* Fondos */
+  --bg-primary: #faf5ff;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.72);
+  
+  /* Bordes */
+  --border-soft: #e9d5ff;
+  --border-light: #f3e8ff;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 12px rgba(147, 51, 234, 0.08);
+  --shadow-md: 0 4px 24px rgba(147, 51, 234, 0.14);
+  --shadow-lg: 0 8px 40px rgba(147, 51, 234, 0.20);
+  
+  /* Radios */
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  
+  /* Transiciones */
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ========================================
+   EDITOR SHELL
+   ======================================== */
 .editor-shell {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  animation: fadeIn 0.4s ease-out;
 }
 
+/* ========================================
+   PAGE HEAD
+   ======================================== */
 .page-head {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  align-items: end;
+  align-items: center;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.page-head:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.page-head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.3rem;
+  color: var(--pink-500);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
 }
 
 .page-head h1 {
   margin: 0;
-  line-height: 1.08;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.page-head h1 span {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .page-head p:last-child {
   max-width: 60ch;
   color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin: 0.3rem 0 0;
+  line-height: 1.7;
 }
 
+.page-head .btn-ghost {
+  flex-shrink: 0;
+}
+
+/* ========================================
+   BOTONES
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.8rem;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-soft);
+}
+
+.btn-ghost:hover {
+  background: var(--purple-50);
+  border-color: var(--purple-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background: var(--accent-gradient-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ========================================
+   LOADING BOX
+   ======================================== */
 .loading-box {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 10rem;
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius-xl);
+  background: var(--pink-50);
+  border: 1px solid var(--pink-200);
+  color: var(--pink-600);
+  font-weight: 600;
+  font-size: 1.1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.loading-box .icon {
+  font-size: 2rem;
+  color: var(--pink-500);
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 18rem;
   gap: 0.8rem;
-  min-height: 8rem;
-  padding: 1rem 1.2rem;
-  border-radius: 1.5rem;
-  background: rgb(255 240 245 / 0.9); /* Ajustado para armonizar con fucsia */
-  color: var(--accent-strong);
+  border: 2px dashed var(--border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--purple-50);
+  padding: 2.5rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
 }
 
-.eyebrow {
-  margin: 0 0 0.45rem;
-  color: var(--accent-strong);
-  font-size: 0.76rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.empty-state .icon {
+  font-size: 4rem;
+  color: var(--purple-300);
 }
 
+.empty-state h3 {
+  color: var(--text-secondary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.empty-state p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  max-width: 40ch;
+  margin: 0;
+}
+
+.empty-state .btn {
+  margin-top: 0.5rem;
+}
+
+/* ========================================
+   ICONOS
+   ======================================== */
 .icon {
   font-family: 'Material Symbols Outlined';
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   line-height: 1;
 }
 
 .spin {
   animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes spin {
@@ -61,9 +274,48 @@
   }
 }
 
-@media (max-width: 760px) {
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
   .page-head {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .page-head .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .editor-shell {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .loading-box {
+    min-height: 8rem;
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-head h1 {
+    font-size: 1.3rem;
+  }
+
+  .empty-state {
+    min-height: 14rem;
+    padding: 1.5rem;
+  }
+
+  .empty-state .icon {
+    font-size: 3rem;
+  }
+
+  .loading-box .icon {
+    font-size: 1.5rem;
   }
 }

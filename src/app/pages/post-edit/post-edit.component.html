@@ -1,9 +1,9 @@
 <section class="editor-shell">
   <header class="page-head">
     <div>
-      <p class="eyebrow">Edicion</p>
-      <h1>Actualizar publicacion #{{ id() }}</h1>
-      <p>Ajusta el contenido, mejora la redaccion y guarda una version mas clara de la entrada.</p>
+      <p class="eyebrow">✏️ Edición</p>
+      <h1>Actualizar publicación #{{ id() }}</h1>
+      <p>Ajusta el contenido, mejora la redacción y guarda una versión más clara de la entrada.</p>
     </div>
     <a class="btn btn-ghost" [routerLink]="['/posts', id()]">
       <span class="icon">visibility</span>
@@ -14,13 +14,20 @@
   @if (service.loading()) {
     <div class="loading-box">
       <span class="icon spin">progress_activity</span>
-      Cargando informacion...
+      Cargando información...
     </div>
-  } @else if (service.selected(); as post) {
+  } @else if (post(); as currentPost) {
     <app-post-form
-      [initialData]="post"
+      [initialData]="currentPost"
       (formSubmit)="onUpdate($event)"
-      (onCancel)="router.navigate(['/posts', id()])"
+      (onCancel)="goBack()"
     />
+  } @else {
+    <div class="empty-state">
+      <span class="icon">inbox</span>
+      <h3>Publicación no encontrada</h3>
+      <p>La publicación que buscas no existe o fue eliminada.</p>
+      <a class="btn btn-primary" routerLink="/posts">Volver al listado</a>
+    </div>
   }
 </section>
